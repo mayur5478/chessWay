@@ -1,0 +1,59 @@
+body{
+	color: brown;
+	font-family: "Comic Sans MS";
+	font-size: 1.4em;
+}
+a{
+	color: brown;
+	display: table-cell;
+	padding-right: 2em;
+}
+.logindiv{
+	background: url("../images/Chess.jpg") no-repeat center;
+	background-size: 100% 100%;
+	height: 100%;
+	width: 100%;
+}
+.inputdiv{
+	display: table-row;
+	top: 3em;
+	left: 10em;
+	position: absolute;		
+}
+.inputdiv label{
+	display: table-cell;
+}
+.inputdiv input{
+	width: 15em;
+	display: table-cell;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.otherlogin{
+	float: right;
+	padding-right: 16em;
+}
+.icon{
+	background-color: transparent;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-size: 5em;
+	background-position: center;
+	border: none;
+	background-repeat: no-repeat;
+}
+.facebookicon{
+	background-image: url("../images/Facebook_icon.png");
+}
+.gmailicon{
+	background-image: url("../images/Gmail_Icon.png");
+}
+.yahooicon{
+	background-image: url("../images/Yahoo-icon.png");
+}
+button{
+	height: 5em;
+	width:7em;
+}
