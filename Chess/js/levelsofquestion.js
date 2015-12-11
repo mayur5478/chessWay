@@ -135,7 +135,7 @@ $(function(){
 			  				var htmltext = "<div class='chapter' id='"+chapterList[index]+"'><a href='#' id='"+chapterList[index]+"'>"+chapterList[index]+"</a>&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i></div>";
 			  				//var htmltext = "<br><a class='chapter'  href='#' id="+chapterList[index]+">"+chapterList[index]+"</a>";
 					 		selector.append(htmltext);
-					 		$("[id='"+chapterList[index]+"']").bind('click',that.onChapterClick);
+					 		$("a[id='"+chapterList[index]+"']").bind('click',that.onChapterClick);
 				 		}
 		  			}
 		  		}
@@ -171,7 +171,6 @@ $(function(){
 		    	var newName = $('#inputtext').val();
 		    	$('#inputtext').val("");
 				$.ajax({url:"config/UpdateChapterName.php",data:{oldChapName:name,newChapName:newName,currentLevel:levelSelected}}).done(function(){			          		
-                          	
                           	$(that).parent().find("a").text(newName);
                             $(that).parent().find("a").attr("id",newName);
                             chapterSelected = newName ;
@@ -442,7 +441,6 @@ $(function(){
 		    	$('#inputtext').val("");
 				$.ajax({url:"config/UpdateProblemName.php",data:{oldProblemName:name,newProblemName:newName,currentLevel:levelSelected,
 					currentChapter:chapterSelected,currentSubChapter:subChapterSelected}}).done(function(){			          		
-                          	
                           	$(that).parent().find("a").text(newName);
                             $(that).parent().find("a").attr("id",newName);
                             problemSelected = newName ;
