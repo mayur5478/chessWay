@@ -9,7 +9,7 @@ if($r)
 {
 	while($row = mysqli_fetch_array($r)){
 		echo $row[0];
-		echo " ";
+		echo "#";
 	}
 }
 else{

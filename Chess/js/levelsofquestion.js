@@ -13,14 +13,14 @@ $(function(){
 		var selector = $("#levelsDivInner");
   		selector.empty();
   		if(option!=""){
-  			var levellist = option.split(" ");
+  			var levellist = option.split("#");
   			levellist.pop();
   			for(var index in levellist){
   				if(levellist[index]!=null && levellist[index].length>0){
 	  				
-			 		var htmltext = "<div class='level' id="+levellist[index]+"><a href='#' id="+levellist[index]+">"+levellist[index]+"</a>&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i></div>";				
+			 		var htmltext = "<div class='level' id='"+levellist[index]+"'><a href='#' id='"+levellist[index]+"'>"+levellist[index]+"</a>&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i></div>";				
 					selector.append(htmltext);
-					$('a'+'#'+levellist[index]).bind('click',that.onLevelClick);
+					$("a[id='"+levellist[index]+"']").bind('click',that.onLevelClick);
 		 		}
   			}
   		}
@@ -39,9 +39,9 @@ $(function(){
 		    "Ok": function() {
 		    	var newname = $(this).find("#inputtext").val();
 		    	$( this ).dialog( "close" );
-				var htmltext = "<div class='level' id="+newname+"><a href='#' id="+newname+">"+newname+"</a>&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i></div>";				
+				var htmltext = "<div class='level' id='"+newname+"'><a href='#' id='"+newname+"'>"+newname+"</a>&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i></div>";				
 				$("#levelsDivInner").append(htmltext);
-				$('a'+'#'+newname).bind('click',that.onLevelClick);
+				$("a[id='"+newname+"']").bind('click',that.onLevelClick);
 				$('#inputtext').val("");
 				
 			    $.ajax({url:"config/insertLevel.php",data:{levelName:newname}}).done(function(value){			          		
@@ -112,7 +112,7 @@ $(function(){
 	});
 	that.onLevelClick  = function(){
 						var id = this.id,
-							parentId = $('#'+this.id).parent().parent().attr('id');
+							parentId = $("[id='"+id+"']").parent().parent().attr('id');
 						levelSelected = id ;
 						if(parentId.indexOf('level')>-1){
 							addChapter(id);					
@@ -128,15 +128,14 @@ $(function(){
 		  		var selector = $("#chaptersDivInner");
 		  		selector.empty();
 		  		if(option!=""){
-		  			var chapterList = option.split(" ");
+		  			var chapterList = option.split("#");
 		  			chapterList.pop();
 		  			for(var index in chapterList){
 		  				if(chapterList[index]!=null && chapterList[index].length>0){
-			  				var htmltext = "<div class='chapter' id="+chapterList[index]+"><a href='#' id="+chapterList[index]+">"+chapterList[index]+"</a>&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i></div>";
+			  				var htmltext = "<div class='chapter' id='"+chapterList[index]+"'><a href='#' id='"+chapterList[index]+"'>"+chapterList[index]+"</a>&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i></div>";
 			  				//var htmltext = "<br><a class='chapter'  href='#' id="+chapterList[index]+">"+chapterList[index]+"</a>";
 					 		selector.append(htmltext);
-					 		
-					 		$('#'+chapterList[index]).bind('click',that.onChapterClick);
+					 		$("[id='"+chapterList[index]+"']").bind('click',that.onChapterClick);
 				 		}
 		  			}
 		  		}
@@ -174,7 +173,7 @@ $(function(){
 				$.ajax({url:"config/UpdateChapterName.php",data:{oldChapName:name,newChapName:newName,currentLevel:levelSelected}}).done(function(){			          		
                           	
                           	$(that).parent().find("a").text(newName);
-                            	$(that).parent().find("a").attr("id",newName);
+                            $(that).parent().find("a").attr("id",newName);
                             chapterSelected = newName ;
                             updateSubChapter();
                             updateProblem();
@@ -222,10 +221,10 @@ $(function(){
 		    "Ok": function() {
 			    	var newname = $(this).find("#inputtext").val();
 			    	$( this ).dialog( "close" );
-	  				var htmltext = "<div class='chapter' id="+newname+"><a href='#' id="+newname+">"+newname+"</a>&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i></div>";
+	  				var htmltext = "<div class='chapter' id='"+newname+"'><a href='#' id='"+newname+"'>"+newname+"</a>&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i></div>";
 	  				//var htmltext = "<br><a class='chapter' href='#' id="+newname+">"+newname+"</a>";
 			 		$("#chaptersDivInner").append(htmltext);	
-			 		$('a'+'#'+newname).bind('click',that.onChapterClick);
+			 		$("a[id='"+newname+"']").bind('click',that.onChapterClick);
 			 		$('#inputtext').val("");
 			 		$.ajax({url:"config/insertChapter.php",data:{name:newname,levelName:levelSelected}}).done(function(){			          		
 				    });
@@ -239,7 +238,7 @@ $(function(){
 	
 		that.onChapterClick  = function(){
 						var id = this.id,
-							parentId = $('#'+this.id).parent().parent().attr('id');
+							parentId = $("[id='"+id+"']").parent().parent().attr('id');
 						chapterSelected = id;
 						if(parentId.indexOf('chapter')>-1){
 							addSubChapter(id);					
@@ -260,15 +259,15 @@ $(function(){
 		  		
 		  		if(option!=""){
 		  			selector.empty();
-		  			var subChapterList = option.split(" ");
+		  			var subChapterList = option.split("#");
 		  				
 		  			subChapterList.pop();
 		  			for(var index in subChapterList){
 		  				if(subChapterList[index]!=null && subChapterList[index].length>0){
-		  					var htmltext = "<div class='subchapter' id="+subChapterList[index]+"><a href='#' id="+subChapterList[index]+">"+subChapterList[index]+"</a>&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i></div>";
+		  					var htmltext = "<div class='subchapter' id='"+subChapterList[index]+"'><a href='#' id='"+subChapterList[index]+"'>"+subChapterList[index]+"</a>&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i></div>";
 		  					//var htmltext = "<br><a  href='#' id="+subChapterList[index]+">"+subChapterList[index]+"</a>";
-					 		selector.append(htmltext);				 		
-		 		 			$('a'+'#'+subChapterList[index]).bind('click',that.onSubChapterClick);
+					 		selector.append(htmltext);	
+		 		 			$("a[id='"+subChapterList[index]+"']").bind('click',that.onSubChapterClick);
 		 		 		}
 		  			}
 		  		}
@@ -340,10 +339,10 @@ $(function(){
 		    "Ok": function() {
 			    	var newname = $(this).find("#inputtext").val();
 			    	$( this ).dialog( "close" );
-			    	var htmltext = "<div class='subchapter' id="+newname+"><a href='#' id="+newname+">"+newname+"</a>&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i></div>";
+			    	var htmltext = "<div class='subchapter' id='"+newname+"'><a href='#' id='"+newname+"'>"+newname+"</a>&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i></div>";
 	  				//var htmltext = "<br><a class='chapter' href='#' id="+newname+">"+newname+"</a>";
 			 		$("#subChaptersDivInner").append(htmltext);	
-			 		$('a'+'#'+newname).bind('click',that.onSubChapterClick);
+			 		$("a[id='"+newname+"']").bind('click',that.onSubChapterClick);
 			 		$('#inputtext').val("");
 					$.ajax({url:"config/insertSubChapter.php",data:{name:newname,chaptername:chapterSelected,levelName:levelSelected}}).done(function(){			          		
 				       
@@ -357,7 +356,7 @@ $(function(){
 	};
 	that.onSubChapterClick= function(){
 					var id = this.id,
-							parentId = $('#'+this.id).parent().parent().attr('id');
+							parentId = $("[id='"+id+"']")	.parent().parent().attr('id');
 						subChapterSelected = id;
 							
 						if(parentId.indexOf('subChapter')>-1){
@@ -367,16 +366,16 @@ $(function(){
 	var addProblem = function(id){
 		  $.ajax({url:'config/getProblems.php',data:{levelId:levelSelected,chapterId:chapterSelected,subChapterId:subChapterSelected}}).done(function(option){
 		  		if(option!=""){
-		  			var problemList = option.split(" "),
+		  			var problemList = option.split("#"),
 		  				selector = $("#problemsDivInner");
 		  			selector.empty();
 		  			problemList.pop();
 		  			for(var index in problemList){
-		  				var htmltext = "<br><a  href='#' id="+problemList[index]+">Problem"+problemList[index]+"</a>";
-				 			var htmltext = "<div class='problem' id="+problemList[index]+"><a href='#' id="+problemList[index]+">"+problemList[index]+"</a></div>";
+		  				var htmltext = "<br><a  href='#' id='"+problemList[index]+"'>Problem"+problemList[index]+"</a>";
+				 			var htmltext = "<div class='problem' id='"+problemList[index]+"'><a href='#' id='"+problemList[index]+"'>"+problemList[index]+"</a></div>";
 	  			/*&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i>*/
 				 		selector.append(htmltext);	
-				 		$('a'+'#'+problemList[index]).bind('click',that.onProblemDivClick);
+				 		$("a[id='"+problemList[index]+"']")	.bind('click',that.onProblemDivClick);
 		  			}
 		  		}
 		  		updateProblem();
@@ -408,9 +407,9 @@ $(function(){
 			    	var newname = $(this).find("#inputtext").val();
 			    	$( this ).dialog( "close" );
 	  				/*&nbsp&nbsp&nbsp&nbsp<i class='fa fa-pencil fa-fw'></i>&nbsp<i class='fa fa-trash-o fa-fw'></i>*/
-	  				var htmltext = "<div class='problem' id="+newname+"><a href='#' id="+newname+">"+newname+"</a></div>";
+	  				var htmltext = "<div class='problem' id='"+newname+"'><a href='#' id='"+newname+"'>"+newname+"</a></div>";
 	  		 		$("#problemsDivInner").append(htmltext);	
-			 		$('a'+'#'+newname).bind('click',that.onProblemDivClick);
+			 		$("a[id='"+newname+"']").bind('click',that.onProblemDivClick);
 			 		$('#inputtext').val("");
 			 		$.ajax({url:"config/insertProblem.php",data:{subChapterName:subChapterSelected,chapterName:chapterSelected,levelName:levelSelected,problemName:newname}}).done(function(){			          		
 				       
@@ -466,11 +465,5 @@ $(function(){
 					});
 				});
 	
-
-
-
-
-
-		
 }); 
 
