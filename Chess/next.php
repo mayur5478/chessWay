@@ -1,7 +1,3 @@
-
-<!--<?php include 'config/showBoard.php' ;?>-->
-				
-<! DOCTYPE HTML>
 <html>
 	<head>
 		<title>Chess</title>

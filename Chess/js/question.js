@@ -5,9 +5,9 @@ var cfg ={
 				};
 				this.board = new ChessBoard('board',cfg);
 				var subChapter = location.search.split('subChapter=')[1]||''.split('&')[0] ;
-				var chapter = location.search.split('&&subChapter=sub1')[0].split('chapterId=')[1];	
-				var level = location.search.split('&&subChapter=sub1')[0].split('&&chapterId=')[0].split('levelId=')[1];
-				var problem = location.search.split('&&subChapter=sub1')[0].split('&&chapterId=')[0].split('&&levelId=')[0].split('problemId=')[1];
+				var chapter = location.search.split('&&subChapter=')[0].split('chapterId=')[1];	
+				var level = location.search.split('&&subChapter=')[0].split('&&chapterId=')[0].split('levelId=')[1];
+				var problem = location.search.split('&&subChapter=')[0].split('&&chapterId=')[0].split('&&levelId=')[0].split('problemId=')[1];
 				
 				$('#saveAndNext').on('click', function() {
 					  var boardPositionNew = board.position();
