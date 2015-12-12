@@ -91,7 +91,7 @@ $(function(){
     });
 	$(document).on('click',".level>.fa-trash-o", function(){
 		var id = $(this).parent().find("a").text();
-		$('#'+id).remove();
+		$("[id='"+id+"']").remove();
 	     //delete level with chapter and subchapter for id 
 		$.ajax({url:"config/DeleteLevelByName.php",data:{name:id}}).done(function(){			          		
 	       	
@@ -189,7 +189,7 @@ $(function(){
 			    });
 				$(document).on('click',".chapter>.fa-trash-o", function(){
 					var id = $(this).parent().find("a").text();
-					$('#'+id).remove();
+					$("[id='"+id+"']").remove();
 					if($("#subChaptersDivChapterLevel").text().indexOf(id)>-1)
 				      	{
 							$("#subChaptersDivChapterLevel").empty();
@@ -310,7 +310,7 @@ $(function(){
 			    });
 				$(document).on('click',".subchapter>.fa-trash-o", function(){
 					var id = $(this).parent().find("a").text();
-					$('#'+id).remove();
+					$("[id='"+id+"']").remove();
 						if($("#problemsDivChapterLevelSubChapter").text().indexOf(id)>-1)
 							{
 								$("#problemsDivChapterLevelSubChapter").empty();
@@ -457,7 +457,7 @@ $(function(){
 			    });
 				$(document).on('click',".problem>.fa-trash-o", function(){
 					var id = $(this).parent().find("a").text();
-					$('#'+id).remove();
+					$("[id='"+id+"']").remove();
 					//delete level with chapter and subchapter for id 
 					$.ajax({url:"config/DeleteProblemByName.php",data:{name:id,chapterName:chapterSelected,subChapterName:subChapterSelected,levelName:levelSelected}}).done(function(){			          		
 					});
